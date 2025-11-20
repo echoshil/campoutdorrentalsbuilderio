@@ -1,24 +1,40 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, User, LogOut } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, User, LogOut, Shield } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isAuthenticated, user, logout, isAdmin, isCustomer } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+  };
+
+  const handleDashboardClick = () => {
+    if (isAdmin) {
+      navigate('/admin/dashboard');
+    } else if (isCustomer) {
+      navigate('/customer/dashboard');
+    }
+    setIsOpen(false);
+  };
+
   const navLinks = [
-    { href: "/", label: "Beranda" },
-    { href: "/katalog", label: "Katalog" },
-    { href: "/cara-sewa", label: "Cara Sewa" },
-    { href: "/paket-camping", label: "Paket Camping" },
-    { href: "/blog", label: "Blog" },
-    { href: "/tentang-kami", label: "Tentang Kami" },
-    { href: "/kontak", label: "Kontak" },
+    { href: '/', label: 'Beranda' },
+    { href: '/katalog', label: 'Katalog' },
+    { href: '/cara-sewa', label: 'Cara Sewa' },
+    { href: '/paket-camping', label: 'Paket Camping' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/tentang-kami', label: 'Tentang Kami' },
+    { href: '/kontak', label: 'Kontak' },
   ];
 
   return (
@@ -53,37 +69,48 @@ export default function Navbar() {
 
           {/* Right side buttons */}
           <div className="flex items-center gap-2 sm:gap-4">
-            {isLoggedIn ? (
+            {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-2">
-                <Link
-                  to="/akun"
-                  className="flex items-center gap-2 px-4 py-2 text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                <Button
+                  onClick={handleDashboardClick}
+                  variant="ghost"
+                  className="flex items-center gap-2"
+                  data-testid="dashboard-button"
                 >
-                  <User size={18} />
-                  <span className="text-sm font-medium">Akun</span>
-                </Link>
-                <button
-                  onClick={() => setIsLoggedIn(false)}
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  {isAdmin ? (
+                    <Shield size={18} className="text-blue-600" />
+                  ) : (
+                    <User size={18} />
+                  )}
+                  <span className="text-sm font-medium">
+                    {isAdmin ? 'Admin' : user?.firstName || 'Akun'}
+                  </span>
+                </Button>
+                <Button
+                  onClick={handleLogout}
+                  variant="ghost"
+                  className="flex items-center gap-2"
+                  data-testid="logout-button"
                 >
                   <LogOut size={18} />
                   <span className="text-sm font-medium">Keluar</span>
-                </button>
+                </Button>
               </div>
             ) : (
               <div className="hidden sm:flex items-center gap-2">
-                <button
-                  onClick={() => setIsLoggedIn(true)}
-                  className="px-4 py-2 text-sm font-medium text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                <Button
+                  onClick={() => navigate('/login')}
+                  variant="ghost"
+                  data-testid="login-button"
                 >
                   Masuk
-                </button>
-                <Link
-                  to="/daftar"
-                  className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+                </Button>
+                <Button
+                  onClick={() => navigate('/register')}
+                  data-testid="register-button"
                 >
                   Daftar
-                </Link>
+                </Button>
               </div>
             )}
 
@@ -91,6 +118,7 @@ export default function Navbar() {
             <button
               onClick={toggleMenu}
               className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+              data-testid="mobile-menu-button"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -112,20 +140,16 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="border-t border-gray-200 my-2 pt-2">
-                {isLoggedIn ? (
+                {isAuthenticated ? (
                   <>
-                    <Link
-                      to="/akun"
-                      className="block px-3 py-2 text-sm font-medium text-primary hover:bg-gray-100 rounded-md transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Akun
-                    </Link>
                     <button
-                      onClick={() => {
-                        setIsLoggedIn(false);
-                        setIsOpen(false);
-                      }}
+                      onClick={handleDashboardClick}
+                      className="w-full text-left px-3 py-2 text-sm font-medium text-primary hover:bg-gray-100 rounded-md transition-colors"
+                    >
+                      {isAdmin ? 'Admin Dashboard' : 'Dashboard Saya'}
+                    </button>
+                    <button
+                      onClick={handleLogout}
                       className="w-full text-left px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                     >
                       Keluar
@@ -135,20 +159,22 @@ export default function Navbar() {
                   <>
                     <button
                       onClick={() => {
-                        setIsLoggedIn(true);
+                        navigate('/login');
                         setIsOpen(false);
                       }}
                       className="w-full text-left px-3 py-2 text-sm font-medium text-primary hover:bg-gray-100 rounded-md transition-colors"
                     >
                       Masuk
                     </button>
-                    <Link
-                      to="/daftar"
-                      className="block px-3 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-md transition-colors mt-2"
-                      onClick={() => setIsOpen(false)}
+                    <button
+                      onClick={() => {
+                        navigate('/register');
+                        setIsOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-md transition-colors mt-2"
                     >
                       Daftar
-                    </Link>
+                    </button>
                   </>
                 )}
               </div>
