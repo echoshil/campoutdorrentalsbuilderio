@@ -8,6 +8,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Katalog from "./pages/Katalog";
+import CaraSewa from "./pages/CaraSewa";
+import PaketCamping from "./pages/PaketCamping";
+import Blog from "./pages/Blog";
+import TentangKami from "./pages/TentangKami";
+import Kontak from "./pages/Kontak";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -22,11 +27,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/katalog" element={<Katalog />} />
-          <Route path="/cara-sewa" element={<Placeholder />} />
-          <Route path="/paket-camping" element={<Placeholder />} />
-          <Route path="/blog" element={<Placeholder />} />
-          <Route path="/tentang-kami" element={<Placeholder />} />
-          <Route path="/kontak" element={<Placeholder />} />
+          <Route path="/cara-sewa" element={<CaraSewa />} />
+          <Route path="/paket-camping" element={<PaketCamping />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/tentang-kami" element={<TentangKami />} />
+          <Route path="/kontak" element={<Kontak />} />
           <Route path="/akun" element={<Placeholder />} />
           <Route path="/daftar" element={<Placeholder />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
