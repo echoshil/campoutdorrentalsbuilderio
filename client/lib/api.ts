@@ -1,131 +1,162 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-// Get token from localStorage
-const getToken = () => {
-  return localStorage.getItem("authToken");
-};
+interface RequestOptions extends RequestInit {
+  token?: string;
+}
 
-// API helper function
-export const apiCall = async (endpoint: string, options: RequestInit = {}) => {
-  const url = `${API_URL}${endpoint}`;
+class ApiError extends Error {
+  status: number;
+  data: any;
+
+  constructor(message: string, status: number, data: any) {
+    super(message);
+    this.status = status;
+    this.data = data;
+    this.name = 'ApiError';
+  }
+}
+
+const request = async (endpoint: string, options: RequestOptions = {}) => {
+  const { token, ...fetchOptions } = options;
+
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
-    ...options.headers,
+    'Content-Type': 'application/json',
+    ...fetchOptions.headers,
   };
 
-  const token = getToken();
   if (token) {
-    headers.Authorization = `Bearer ${token}`;
+    headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(url, {
-    ...options,
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    ...fetchOptions,
     headers,
   });
-
-  if (response.status === 401) {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  }
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Terjadi kesalahan pada server");
+    throw new ApiError(data.message || 'Request failed', response.status, data);
   }
 
   return data;
 };
 
 // Auth APIs
-export const authAPI = {
+export const authApi = {
   adminLogin: (username: string, password: string) =>
-    apiCall("/auth/admin/login", {
-      method: "POST",
+    request('/api/auth/admin/login', {
+      method: 'POST',
       body: JSON.stringify({ username, password }),
     }),
 
   customerLogin: (email: string, password: string) =>
-    apiCall("/auth/customer/login", {
-      method: "POST",
+    request('/api/auth/customer/login', {
+      method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
 
-  customerRegister: (
-    email: string,
-    password: string,
-    firstName?: string,
-    lastName?: string,
-    phone?: string,
-  ) =>
-    apiCall("/auth/customer/register", {
-      method: "POST",
-      body: JSON.stringify({ email, password, firstName, lastName, phone }),
+  customerRegister: (data: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+  }) =>
+    request('/api/auth/customer/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
     }),
 
-  getMe: () => apiCall("/auth/me"),
+  getMe: (token: string) =>
+    request('/api/auth/me', {
+      token,
+    }),
 };
 
-// Product APIs
-export const productAPI = {
-  getAll: (category?: string, search?: string, sort?: string) => {
-    const params = new URLSearchParams();
-    if (category) params.append("category", category);
-    if (search) params.append("search", search);
-    if (sort) params.append("sort", sort);
-    return apiCall(`/products?${params.toString()}`);
+// Products APIs
+export const productsApi = {
+  getAll: (params?: { category?: string; search?: string; sort?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.category) queryParams.append('category', params.category);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.sort) queryParams.append('sort', params.sort);
+
+    const query = queryParams.toString();
+    return request(`/api/products${query ? `?${query}` : ''}`);
   },
 
-  getById: (id: string) => apiCall(`/products/${id}`),
+  getById: (id: string) => request(`/api/products/${id}`),
 
-  create: (product: any) =>
-    apiCall("/products", {
-      method: "POST",
-      body: JSON.stringify(product),
+  create: (data: any, token: string) =>
+    request('/api/products', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      token,
     }),
 
-  update: (id: string, product: any) =>
-    apiCall(`/products/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(product),
+  update: (id: string, data: any, token: string) =>
+    request(`/api/products/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      token,
     }),
 
-  delete: (id: string) =>
-    apiCall(`/products/${id}`, {
-      method: "DELETE",
+  delete: (id: string, token: string) =>
+    request(`/api/products/${id}`, {
+      method: 'DELETE',
+      token,
     }),
 
-  updateStock: (id: string, quantity: number) =>
-    apiCall(`/products/${id}/stock`, {
-      method: "PATCH",
+  updateStock: (id: string, quantity: number, token: string) =>
+    request(`/api/products/${id}/stock`, {
+      method: 'PATCH',
       body: JSON.stringify({ quantity }),
+      token,
     }),
 };
 
-// Order APIs
-export const orderAPI = {
-  create: (order: any) =>
-    apiCall("/orders", {
-      method: "POST",
-      body: JSON.stringify(order),
+// Orders APIs
+export const ordersApi = {
+  create: (data: any, token: string) =>
+    request('/api/orders', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      token,
     }),
 
-  getMyOrders: () => apiCall("/orders"),
+  getUserOrders: (token: string) =>
+    request('/api/orders', {
+      token,
+    }),
 
-  getById: (id: string) => apiCall(`/orders/${id}`),
+  getById: (id: string, token: string) =>
+    request(`/api/orders/${id}`, {
+      token,
+    }),
 
-  uploadPaymentProof: (orderId: string, paymentProof: string) =>
-    apiCall(`/orders/${orderId}/payment-proof`, {
-      method: "POST",
+  uploadPaymentProof: (id: string, paymentProof: string, token: string) =>
+    request(`/api/orders/${id}/payment-proof`, {
+      method: 'POST',
       body: JSON.stringify({ paymentProof }),
+      token,
     }),
 
-  getAllOrders: () => apiCall("/orders/admin/all"),
+  getAllOrders: (token: string) =>
+    request('/api/orders/admin/all', {
+      token,
+    }),
 
-  updateStatus: (orderId: string, status: string, paymentStatus?: string) =>
-    apiCall(`/orders/${orderId}/status`, {
-      method: "PATCH",
-      body: JSON.stringify({ status, paymentStatus }),
+  updateStatus: (
+    id: string,
+    data: { status?: string; paymentStatus?: string },
+    token: string
+  ) =>
+    request(`/api/orders/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      token,
     }),
 };
+
+export { ApiError };
