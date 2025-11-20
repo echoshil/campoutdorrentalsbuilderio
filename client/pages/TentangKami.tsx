@@ -134,18 +134,21 @@ export default function TentangKami() {
                   Siapa Kami?
                 </h2>
                 <p className="text-gray-600 mb-4 leading-relaxed">
-                  OutdoorCamp adalah penyedia perlengkapan camping terpercaya di Indonesia
-                  yang telah melayani ribuan pelanggan selama lebih dari 5 tahun. Kami berkomitmen
-                  untuk membuat petualangan outdoor Anda menjadi lebih mudah, nyaman, dan terjangkau.
+                  OutdoorCamp adalah penyedia perlengkapan camping terpercaya di
+                  Indonesia yang telah melayani ribuan pelanggan selama lebih
+                  dari 5 tahun. Kami berkomitmen untuk membuat petualangan
+                  outdoor Anda menjadi lebih mudah, nyaman, dan terjangkau.
                 </p>
                 <p className="text-gray-600 mb-4 leading-relaxed">
-                  Dengan koleksi lebih dari 150 produk berkualitas tinggi dan tim profesional yang
-                  berpengalaman, kami memastikan setiap pelanggan mendapatkan pengalaman rental yang
-                  memuaskan dan memorable.
+                  Dengan koleksi lebih dari 150 produk berkualitas tinggi dan
+                  tim profesional yang berpengalaman, kami memastikan setiap
+                  pelanggan mendapatkan pengalaman rental yang memuaskan dan
+                  memorable.
                 </p>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Kami tidak hanya menyewakan perlengkapan, tetapi juga menyediakan panduan lengkap,
-                  tips camping, dan dukungan penuh untuk menjadikan setiap petualangan Anda sukses.
+                  Kami tidak hanya menyewakan perlengkapan, tetapi juga
+                  menyediakan panduan lengkap, tips camping, dan dukungan penuh
+                  untuk menjadikan setiap petualangan Anda sukses.
                 </p>
 
                 <div className="flex gap-4">
@@ -167,7 +170,8 @@ export default function TentangKami() {
               <div className="text-center">
                 <div className="text-9xl mb-8">⛺</div>
                 <p className="text-gray-600 font-semibold">
-                  "Buat setiap petualangan outdoor Anda sempurna bersama OutdoorCamp"
+                  "Buat setiap petualangan outdoor Anda sempurna bersama
+                  OutdoorCamp"
                 </p>
               </div>
             </div>
@@ -185,9 +189,9 @@ export default function TentangKami() {
                 <Target size={40} className="text-primary mb-4" />
                 <h3 className="text-2xl font-bold mb-4">Visi Kami</h3>
                 <p className="text-gray-600">
-                  Menjadi penyedia perlengkapan outdoor terdepan di Indonesia yang membuat
-                  petualangan alam terbuka dapat diakses oleh semua orang dengan kualitas terjamin
-                  dan harga terjangkau.
+                  Menjadi penyedia perlengkapan outdoor terdepan di Indonesia
+                  yang membuat petualangan alam terbuka dapat diakses oleh semua
+                  orang dengan kualitas terjamin dan harga terjangkau.
                 </p>
               </div>
 
@@ -267,7 +271,8 @@ export default function TentangKami() {
           <div className="container-custom">
             <h2 className="section-heading">Perjalanan OutdoorCamp</h2>
             <p className="section-subheading">
-              Milestone penting dalam perkembangan OutdoorCamp sejak awal hingga sekarang
+              Milestone penting dalam perkembangan OutdoorCamp sejak awal hingga
+              sekarang
             </p>
 
             <div className="max-w-4xl mx-auto">
@@ -320,7 +325,9 @@ export default function TentangKami() {
                   </div>
                   <div className="p-6 text-center">
                     <h3 className="text-lg font-bold mb-1">{member.name}</h3>
-                    <p className="text-primary font-semibold mb-3">{member.role}</p>
+                    <p className="text-primary font-semibold mb-3">
+                      {member.role}
+                    </p>
                     <p className="text-sm text-gray-600">{member.bio}</p>
                   </div>
                 </div>
@@ -387,7 +394,8 @@ export default function TentangKami() {
               <MapPin size={40} className="text-primary mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-4">Kunjungi Kami</h3>
               <p className="text-gray-600 mb-2">
-                <strong>Alamat:</strong> Jl. Outdoor No. 123, Jakarta Timur, Indonesia
+                <strong>Alamat:</strong> Jl. Outdoor No. 123, Jakarta Timur,
+                Indonesia
               </p>
               <p className="text-gray-600 mb-2">
                 <strong>Telepon:</strong> +62 812-3456-7890
@@ -412,7 +420,8 @@ export default function TentangKami() {
               Bergabunglah dengan Ribuan Petualang Kami
             </h2>
             <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
-              Rasakan pengalaman camping terbaik dengan peralatan berkualitas dan layanan terpercaya dari OutdoorCamp.
+              Rasakan pengalaman camping terbaik dengan peralatan berkualitas
+              dan layanan terpercaya dari OutdoorCamp.
             </p>
             <Link
               to="/katalog"

@@ -141,7 +141,12 @@ export default function PaketCamping() {
         "Tutorial Video",
         "Map Lokasi",
       ],
-      suitable: ["Pemula", "Trial Pertama", "Weekend Singkat", "Belajar Camping"],
+      suitable: [
+        "Pemula",
+        "Trial Pertama",
+        "Weekend Singkat",
+        "Belajar Camping",
+      ],
     },
     {
       id: 6,
@@ -244,7 +249,9 @@ export default function PaketCamping() {
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       {pkg.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4">{pkg.description}</p>
+                    <p className="text-gray-600 text-sm mb-4">
+                      {pkg.description}
+                    </p>
 
                     {/* Capacity & Duration */}
                     <div className="flex items-center justify-center gap-4 text-sm text-gray-700 mb-4">
@@ -284,7 +291,10 @@ export default function PaketCamping() {
                     </h4>
                     <ul className="space-y-3 mb-8">
                       {pkg.included.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-gray-700"
+                        >
                           <span className="text-green-600 mt-1">✓</span>
                           <span>{item}</span>
                         </li>
@@ -292,7 +302,9 @@ export default function PaketCamping() {
                     </ul>
 
                     {/* Suitable For */}
-                    <h4 className="font-bold text-gray-900 mb-3">Cocok untuk:</h4>
+                    <h4 className="font-bold text-gray-900 mb-3">
+                      Cocok untuk:
+                    </h4>
                     <div className="flex flex-wrap gap-2 mb-6">
                       {pkg.suitable.map((suit, i) => (
                         <span
@@ -322,7 +334,8 @@ export default function PaketCamping() {
               <Zap size={32} className="text-primary mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-2">Paket Tidak Sesuai?</h3>
               <p className="text-gray-600 mb-6">
-                Hubungi customer service kami untuk membuat paket custom sesuai kebutuhan spesifik Anda.
+                Hubungi customer service kami untuk membuat paket custom sesuai
+                kebutuhan spesifik Anda.
               </p>
               <a
                 href="https://wa.me/628123456789"
@@ -348,22 +361,53 @@ export default function PaketCamping() {
                     <th className="px-6 py-3 text-left font-bold">Fitur</th>
                     <th className="px-6 py-3 text-center font-bold">Pemula</th>
                     <th className="px-6 py-3 text-center font-bold">Couple</th>
-                    <th className="px-6 py-3 text-center font-bold">Keluarga</th>
+                    <th className="px-6 py-3 text-center font-bold">
+                      Keluarga
+                    </th>
                     <th className="px-6 py-3 text-center font-bold">Gunung</th>
-                    <th className="px-6 py-3 text-center font-bold">Extended</th>
+                    <th className="px-6 py-3 text-center font-bold">
+                      Extended
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
                     { feature: "Durasi", data: ["1H", "3H", "3H", "5H", "3H"] },
-                    { feature: "Harga", data: ["Rp 250K", "Rp 450K", "Rp 850K", "Rp 1.2M", "Rp 1.5M"] },
-                    { feature: "Tenda", data: ["1x2P", "1x2P", "1x4P", "1x4P", "3x Tenda"] },
-                    { feature: "Sleeping Bag", data: ["2x", "2x", "4x", "4x", "6x"] },
-                    { feature: "Kompor", data: ["1x", "1x", "1x", "2x Prof", "2x"] },
-                    { feature: "Perlengkapan Dapur", data: ["Basic", "Basic", "Lengkap", "Prof", "Komplit"] },
-                    { feature: "Support Team", data: ["No", "No", "No", "24/7", "Optional"] },
+                    {
+                      feature: "Harga",
+                      data: [
+                        "Rp 250K",
+                        "Rp 450K",
+                        "Rp 850K",
+                        "Rp 1.2M",
+                        "Rp 1.5M",
+                      ],
+                    },
+                    {
+                      feature: "Tenda",
+                      data: ["1x2P", "1x2P", "1x4P", "1x4P", "3x Tenda"],
+                    },
+                    {
+                      feature: "Sleeping Bag",
+                      data: ["2x", "2x", "4x", "4x", "6x"],
+                    },
+                    {
+                      feature: "Kompor",
+                      data: ["1x", "1x", "1x", "2x Prof", "2x"],
+                    },
+                    {
+                      feature: "Perlengkapan Dapur",
+                      data: ["Basic", "Basic", "Lengkap", "Prof", "Komplit"],
+                    },
+                    {
+                      feature: "Support Team",
+                      data: ["No", "No", "No", "24/7", "Optional"],
+                    },
                   ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-100"}>
+                    <tr
+                      key={i}
+                      className={i % 2 === 0 ? "bg-white" : "bg-gray-100"}
+                    >
                       <td className="px-6 py-3 font-semibold text-gray-900">
                         {row.feature}
                       </td>
@@ -430,7 +474,8 @@ export default function PaketCamping() {
               Pilih Paket Anda Sekarang
             </h2>
             <p className="text-lg text-green-100 mb-8">
-              Jangan biarkan kesempatan liburan sempurna Anda terlewat. Pesan paket camping favorit hari ini.
+              Jangan biarkan kesempatan liburan sempurna Anda terlewat. Pesan
+              paket camping favorit hari ini.
             </p>
             <Link
               to="/katalog"

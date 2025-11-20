@@ -214,7 +214,9 @@ export default function Blog() {
                   <h2 className="text-3xl font-bold mb-4">
                     {filteredPosts[0].title}
                   </h2>
-                  <p className="text-gray-600 mb-6">{filteredPosts[0].excerpt}</p>
+                  <p className="text-gray-600 mb-6">
+                    {filteredPosts[0].excerpt}
+                  </p>
 
                   <div className="flex flex-wrap gap-4 items-center mb-6 text-sm text-gray-600">
                     <div className="flex items-center gap-1">
@@ -227,7 +229,7 @@ export default function Blog() {
                     </div>
                     <div className="text-xs text-gray-500">
                       {new Date(filteredPosts[0].date).toLocaleDateString(
-                        "id-ID"
+                        "id-ID",
                       )}
                     </div>
                   </div>
@@ -246,60 +248,62 @@ export default function Blog() {
           {/* Posts Grid */}
           {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPosts.slice(selectedCategory === "all" ? 1 : 0).map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden group cursor-pointer"
-                >
-                  {/* Image */}
-                  <div className="bg-gradient-to-br from-primary/20 to-secondary/20 h-40 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
-                    {post.image}
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    {/* Category Tag */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <Tag size={14} className="text-secondary" />
-                      <span className="text-xs font-semibold text-secondary">
-                        {post.category}
-                      </span>
+              {filteredPosts
+                .slice(selectedCategory === "all" ? 1 : 0)
+                .map((post) => (
+                  <article
+                    key={post.id}
+                    className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden group cursor-pointer"
+                  >
+                    {/* Image */}
+                    <div className="bg-gradient-to-br from-primary/20 to-secondary/20 h-40 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
+                      {post.image}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-
-                    {/* Meta Info */}
-                    <div className="flex items-center gap-3 text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
-                      <span>{post.author}</span>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        <Clock size={12} />
-                        {post.readTime} min
-                      </span>
-                    </div>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
-                        >
-                          #{tag}
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Category Tag */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <Tag size={14} className="text-secondary" />
+                        <span className="text-xs font-semibold text-secondary">
+                          {post.category}
                         </span>
-                      ))}
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h3>
+
+                      {/* Excerpt */}
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Meta Info */}
+                      <div className="flex items-center gap-3 text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
+                        <span>{post.author}</span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1">
+                          <Clock size={12} />
+                          {post.readTime} min
+                        </span>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 2).map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
             </div>
           ) : (
             <div className="text-center py-12 bg-white rounded-xl">

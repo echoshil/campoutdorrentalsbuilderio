@@ -6,10 +6,7 @@ const getToken = () => {
 };
 
 // API helper function
-export const apiCall = async (
-  endpoint: string,
-  options: RequestInit = {}
-) => {
+export const apiCall = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${API_URL}${endpoint}`;
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -55,7 +52,13 @@ export const authAPI = {
       body: JSON.stringify({ email, password }),
     }),
 
-  customerRegister: (email: string, password: string, firstName?: string, lastName?: string, phone?: string) =>
+  customerRegister: (
+    email: string,
+    password: string,
+    firstName?: string,
+    lastName?: string,
+    phone?: string,
+  ) =>
     apiCall("/auth/customer/register", {
       method: "POST",
       body: JSON.stringify({ email, password, firstName, lastName, phone }),

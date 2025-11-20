@@ -131,7 +131,7 @@ router.post(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Update Product (Admin Only)
@@ -141,8 +141,16 @@ router.put(
   adminOnly,
   async (req: AuthRequest, res: Response) => {
     try {
-      const { name, category, description, price, stock, capacity, brand, specifications } =
-        req.body;
+      const {
+        name,
+        category,
+        description,
+        price,
+        stock,
+        capacity,
+        brand,
+        specifications,
+      } = req.body;
 
       const product = await Product.findByIdAndUpdate(
         req.params.id,
@@ -156,7 +164,7 @@ router.put(
           brand,
           specifications: specifications || {},
         },
-        { new: true }
+        { new: true },
       );
 
       if (!product) {
@@ -178,7 +186,7 @@ router.put(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Delete Product (Admin Only)
@@ -208,7 +216,7 @@ router.delete(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Update Stock (Admin Only)
@@ -230,7 +238,7 @@ router.patch(
       const product = await Product.findByIdAndUpdate(
         req.params.id,
         { stock: quantity },
-        { new: true }
+        { new: true },
       );
 
       if (!product) {
@@ -252,7 +260,7 @@ router.patch(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 export default router;

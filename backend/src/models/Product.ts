@@ -66,7 +66,7 @@ const productSchema = new Schema<IProduct>(
       default: 0,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model<IProduct>("Product", productSchema);

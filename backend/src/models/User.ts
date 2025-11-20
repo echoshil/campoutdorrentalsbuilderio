@@ -55,7 +55,7 @@ const userSchema = new Schema<IUser>(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Hash password sebelum save
@@ -73,7 +73,7 @@ userSchema.pre("save", async function (next) {
 
 // Method untuk compare password
 userSchema.methods.comparePassword = async function (
-  password: string
+  password: string,
 ): Promise<boolean> {
   return await bcryptjs.compare(password, this.password);
 };

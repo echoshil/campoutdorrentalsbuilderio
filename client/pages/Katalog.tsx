@@ -217,7 +217,17 @@ export default function Katalog() {
     { value: "lighting", label: "Lighting" },
   ];
 
-  const brands = ["Coleman", "Osprey", "Thermal", "Primus", "Decathlon", "Salomon", "Black Diamond", "ENO", "Naturehike"];
+  const brands = [
+    "Coleman",
+    "Osprey",
+    "Thermal",
+    "Primus",
+    "Decathlon",
+    "Salomon",
+    "Black Diamond",
+    "ENO",
+    "Naturehike",
+  ];
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
@@ -273,7 +283,9 @@ export default function Katalog() {
       {/* Page Header */}
       <section className="bg-gradient-to-r from-primary to-green-700 text-white py-12">
         <div className="container-custom">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Katalog Produk</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            Katalog Produk
+          </h1>
           <p className="text-green-100">
             Temukan perlengkapan camping impian Anda
           </p>
@@ -346,10 +358,7 @@ export default function Katalog() {
                       step="10000"
                       value={priceRange[1]}
                       onChange={(e) =>
-                        setPriceRange([
-                          priceRange[0],
-                          parseInt(e.target.value),
-                        ])
+                        setPriceRange([priceRange[0], parseInt(e.target.value)])
                       }
                       className="w-full"
                     />

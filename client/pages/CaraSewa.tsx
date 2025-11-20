@@ -121,7 +121,11 @@ export default function CaraSewa() {
       name: "COD",
       description: "Bayar saat pengambilan di lokasi kami",
       icon: "💵",
-      details: ["Bayar tunai atau transfer", "Tanpa biaya tambahan", "Proses cepat"],
+      details: [
+        "Bayar tunai atau transfer",
+        "Tanpa biaya tambahan",
+        "Proses cepat",
+      ],
     },
     {
       name: "Cicilan",
@@ -196,7 +200,10 @@ export default function CaraSewa() {
 
             <div className="space-y-8">
               {steps.map((step, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden">
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-md overflow-hidden"
+                >
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
                     {/* Left - Step Number & Icon */}
                     <div className="flex flex-col items-center md:items-start">
@@ -215,8 +222,13 @@ export default function CaraSewa() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {step.details.map((detail, i) => (
                           <div key={i} className="flex items-center gap-2">
-                            <CheckCircle size={18} className="text-green-600 flex-shrink-0" />
-                            <span className="text-sm text-gray-700">{detail}</span>
+                            <CheckCircle
+                              size={18}
+                              className="text-green-600 flex-shrink-0"
+                            />
+                            <span className="text-sm text-gray-700">
+                              {detail}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -238,13 +250,21 @@ export default function CaraSewa() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {paymentMethods.map((method, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
+                >
                   <div className="text-4xl mb-4">{method.icon}</div>
                   <h3 className="text-lg font-bold mb-2">{method.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{method.description}</p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {method.description}
+                  </p>
                   <ul className="space-y-2">
                     {method.details.map((detail, i) => (
-                      <li key={i} className="text-xs text-gray-700 flex items-start gap-2">
+                      <li
+                        key={i}
+                        className="text-xs text-gray-700 flex items-start gap-2"
+                      >
                         <span className="text-primary mt-1">•</span>
                         <span>{detail}</span>
                       </li>
@@ -266,7 +286,10 @@ export default function CaraSewa() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {requirements.map((req, index) => (
-                <div key={index} className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-6 border-l-4 border-primary">
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-6 border-l-4 border-primary"
+                >
                   <h3 className="font-bold text-gray-900 mb-2">{req.title}</h3>
                   <p className="text-gray-600">{req.desc}</p>
                 </div>
@@ -276,11 +299,20 @@ export default function CaraSewa() {
             {/* Important Notice */}
             <div className="mt-8 bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6">
               <div className="flex gap-4">
-                <AlertCircle size={24} className="text-blue-600 flex-shrink-0 mt-1" />
+                <AlertCircle
+                  size={24}
+                  className="text-blue-600 flex-shrink-0 mt-1"
+                />
                 <div>
-                  <h4 className="font-bold text-blue-900 mb-2">Perhatian Penting</h4>
+                  <h4 className="font-bold text-blue-900 mb-2">
+                    Perhatian Penting
+                  </h4>
                   <p className="text-blue-800 text-sm">
-                    Penyewa harus melakukan verifikasi identitas yang valid sebelum booking dapat disetujui. Setiap data yang diberikan harus akurat dan sesuai dengan identitas asli. Pemberian data palsu dapat mengakibatkan pembatalan pemesanan dan blacklist dari layanan kami.
+                    Penyewa harus melakukan verifikasi identitas yang valid
+                    sebelum booking dapat disetujui. Setiap data yang diberikan
+                    harus akurat dan sesuai dengan identitas asli. Pemberian
+                    data palsu dapat mengakibatkan pembatalan pemesanan dan
+                    blacklist dari layanan kami.
                   </p>
                 </div>
               </div>
@@ -324,7 +356,8 @@ export default function CaraSewa() {
               Siap untuk Memulai?
             </h2>
             <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
-              Jelajahi katalog produk kami dan mulai pesan perlengkapan camping favorit Anda sekarang.
+              Jelajahi katalog produk kami dan mulai pesan perlengkapan camping
+              favorit Anda sekarang.
             </p>
             <Link
               to="/katalog"

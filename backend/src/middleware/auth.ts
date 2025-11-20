@@ -12,7 +12,7 @@ export interface AuthRequest extends Request {
 export const verifyToken = (
   req: AuthRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
 
@@ -42,7 +42,7 @@ export const verifyToken = (
 export const adminOnly = (
   req: AuthRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (req.user?.role !== "admin") {
     return res.status(403).json({
@@ -56,7 +56,7 @@ export const adminOnly = (
 export const customerOnly = (
   req: AuthRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (req.user?.role !== "customer") {
     return res.status(403).json({

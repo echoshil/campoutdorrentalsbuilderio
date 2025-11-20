@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { Star, MapPin, Users, Clock, ArrowRight, ChevronDown } from "lucide-react";
+import {
+  Star,
+  MapPin,
+  Users,
+  Clock,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -104,7 +111,9 @@ export default function Home() {
                 Jelajahi Alam Bebas dengan Percaya Diri
               </h1>
               <p className="text-lg md:text-xl text-green-100 mb-8 leading-relaxed">
-                Sewa perlengkapan camping berkualitas tinggi dengan harga terjangkau. Nikmati petualangan outdoor Anda tanpa khawatir tentang equipmentnya.
+                Sewa perlengkapan camping berkualitas tinggi dengan harga
+                terjangkau. Nikmati petualangan outdoor Anda tanpa khawatir
+                tentang equipmentnya.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -338,13 +347,17 @@ export default function Home() {
                 </div>
 
                 {/* Text */}
-                <p className="text-gray-700 mb-6 italic">"{testimonial.text}"</p>
+                <p className="text-gray-700 mb-6 italic">
+                  "{testimonial.text}"
+                </p>
 
                 {/* Author */}
                 <div className="flex items-center gap-3">
                   <div className="text-3xl">{testimonial.avatar}</div>
                   <div>
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
+                    <p className="font-bold text-gray-900">
+                      {testimonial.name}
+                    </p>
                     <p className="text-xs text-gray-600">{testimonial.role}</p>
                   </div>
                 </div>

@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -17,7 +24,8 @@ export default function Footer() {
               <h3 className="text-lg font-bold">OutdoorCamp</h3>
             </div>
             <p className="text-gray-400 text-sm mb-4">
-              Penyedia perlengkapan camping berkualitas tinggi untuk petualangan Anda.
+              Penyedia perlengkapan camping berkualitas tinggi untuk petualangan
+              Anda.
             </p>
             <div className="flex gap-4">
               <a
@@ -124,7 +132,10 @@ export default function Footer() {
             <h4 className="font-semibold text-white mb-4">Hubungi Kami</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <MapPin size={20} className="text-secondary mt-1 flex-shrink-0" />
+                <MapPin
+                  size={20}
+                  className="text-secondary mt-1 flex-shrink-0"
+                />
                 <p className="text-gray-400 text-sm">
                   Jl. Outdoor No. 123, Jakarta, Indonesia
                 </p>
@@ -145,7 +156,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="text-center text-gray-400 text-sm">
             <p>
-              &copy; {currentYear} OutdoorCamp. Semua hak dilindungi undang-undang.
+              &copy; {currentYear} OutdoorCamp. Semua hak dilindungi
+              undang-undang.
             </p>
           </div>
         </div>

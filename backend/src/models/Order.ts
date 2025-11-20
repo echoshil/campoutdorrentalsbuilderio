@@ -15,7 +15,13 @@ export interface IOrder extends Document {
   userId: mongoose.Types.ObjectId;
   items: IOrderItem[];
   totalAmount: number;
-  status: "pending" | "confirmed" | "processing" | "ready" | "returned" | "cancelled";
+  status:
+    | "pending"
+    | "confirmed"
+    | "processing"
+    | "ready"
+    | "returned"
+    | "cancelled";
   paymentMethod: "transfer" | "ewallet" | "cod";
   paymentProof?: string;
   paymentStatus: "unpaid" | "partial" | "paid";
@@ -56,7 +62,14 @@ const orderSchema = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ["pending", "confirmed", "processing", "ready", "returned", "cancelled"],
+      enum: [
+        "pending",
+        "confirmed",
+        "processing",
+        "ready",
+        "returned",
+        "cancelled",
+      ],
       default: "pending",
     },
     paymentMethod: {
@@ -84,7 +97,7 @@ const orderSchema = new Schema<IOrder>(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model<IOrder>("Order", orderSchema);

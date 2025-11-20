@@ -25,7 +25,7 @@ export default function Kontak() {
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -253,7 +253,9 @@ export default function Kontak() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     >
                       <option value="">Pilih Subjek</option>
-                      <option value="Pertanyaan Produk">Pertanyaan Produk</option>
+                      <option value="Pertanyaan Produk">
+                        Pertanyaan Produk
+                      </option>
                       <option value="Booking">Booking</option>
                       <option value="Komplain">Komplain</option>
                       <option value="Saran">Saran</option>
@@ -345,7 +347,10 @@ export default function Kontak() {
                   <h3 className="text-lg font-bold mb-4">{topic.title}</h3>
                   <ul className="space-y-2">
                     {topic.questions.map((q, i) => (
-                      <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+                      <li
+                        key={i}
+                        className="text-sm text-gray-600 flex items-start gap-2"
+                      >
                         <span className="text-primary mt-1">•</span>
                         <span>{q}</span>
                       </li>
@@ -371,7 +376,8 @@ export default function Kontak() {
           <div className="container-custom">
             <h2 className="section-heading">Lokasi Kami</h2>
             <p className="section-subheading">
-              Kunjungi toko kami untuk konsultasi langsung dan pengambilan barang
+              Kunjungi toko kami untuk konsultasi langsung dan pengambilan
+              barang
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -404,8 +410,10 @@ export default function Kontak() {
                     OutdoorCamp Store
                   </p>
                   <p className="text-gray-600 leading-relaxed">
-                    Jl. Outdoor No. 123<br />
-                    Jakarta Timur, 13320<br />
+                    Jl. Outdoor No. 123
+                    <br />
+                    Jakarta Timur, 13320
+                    <br />
                     Indonesia
                   </p>
 
@@ -413,7 +421,7 @@ export default function Kontak() {
                     className="mt-4 w-full bg-primary text-white font-semibold py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        "Jl. Outdoor No. 123, Jakarta Timur"
+                        "Jl. Outdoor No. 123, Jakarta Timur",
                       );
                       alert("Alamat disalin ke clipboard");
                     }}
@@ -447,7 +455,8 @@ export default function Kontak() {
               Sudah Siap untuk Petualangan?
             </h2>
             <p className="text-lg text-green-100 mb-8">
-              Hubungi kami sekarang dan mulai persiapkan liburan camping impian Anda bersama OutdoorCamp.
+              Hubungi kami sekarang dan mulai persiapkan liburan camping impian
+              Anda bersama OutdoorCamp.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

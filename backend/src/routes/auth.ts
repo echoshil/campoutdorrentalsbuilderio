@@ -29,7 +29,7 @@ router.post("/admin/login", async (req: AuthRequest, res: Response) => {
           role: "admin",
         },
         process.env.JWT_SECRET || "",
-        { expiresIn: process.env.JWT_EXPIRE || "7d" }
+        { expiresIn: process.env.JWT_EXPIRE || "7d" },
       );
 
       return res.status(200).json({
@@ -62,7 +62,7 @@ router.post("/admin/login", async (req: AuthRequest, res: Response) => {
         role: admin.role,
       },
       process.env.JWT_SECRET || "",
-      { expiresIn: process.env.JWT_EXPIRE || "7d" }
+      { expiresIn: process.env.JWT_EXPIRE || "7d" },
     );
 
     res.status(200).json({
@@ -125,7 +125,7 @@ router.post("/customer/register", async (req: AuthRequest, res: Response) => {
         role: newUser.role,
       },
       process.env.JWT_SECRET || "",
-      { expiresIn: process.env.JWT_EXPIRE || "7d" }
+      { expiresIn: process.env.JWT_EXPIRE || "7d" },
     );
 
     res.status(201).json({
@@ -177,7 +177,7 @@ router.post("/customer/login", async (req: AuthRequest, res: Response) => {
         role: user.role,
       },
       process.env.JWT_SECRET || "",
-      { expiresIn: process.env.JWT_EXPIRE || "7d" }
+      { expiresIn: process.env.JWT_EXPIRE || "7d" },
     );
 
     res.status(200).json({

@@ -1,7 +1,12 @@
 import express, { Response } from "express";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
-import { AuthRequest, verifyToken, customerOnly, adminOnly } from "../middleware/auth.js";
+import {
+  AuthRequest,
+  verifyToken,
+  customerOnly,
+  adminOnly,
+} from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -12,13 +17,7 @@ router.post(
   customerOnly,
   async (req: AuthRequest, res: Response) => {
     try {
-      const {
-        items,
-        paymentMethod,
-        pickupDate,
-        returnDate,
-        notes,
-      } = req.body;
+      const { items, paymentMethod, pickupDate, returnDate, notes } = req.body;
 
       if (!items || items.length === 0) {
         return res.status(400).json({
@@ -30,7 +29,8 @@ router.post(
       if (!paymentMethod || !pickupDate || !returnDate) {
         return res.status(400).json({
           success: false,
-          message: "Metode pembayaran, tanggal pengambilan, dan pengembalian harus diisi.",
+          message:
+            "Metode pembayaran, tanggal pengambilan, dan pengembalian harus diisi.",
         });
       }
 
@@ -58,7 +58,7 @@ router.post(
         const startDate = new Date(item.startDate);
         const endDate = new Date(item.endDate);
         const durationDays = Math.ceil(
-          (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+          (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
         );
 
         const subtotal = product.price * item.quantity * durationDays;
@@ -116,7 +116,7 @@ router.post(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Get User Orders (Customer)
@@ -141,50 +141,46 @@ router.get(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Get Order by ID
-router.get(
-  "/:id",
-  verifyToken,
-  async (req: AuthRequest, res: Response) => {
-    try {
-      const order = await Order.findById(req.params.id)
-        .populate("userId", "email firstName lastName phone")
-        .populate("items.productId");
+router.get("/:id", verifyToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate("userId", "email firstName lastName phone")
+      .populate("items.productId");
 
-      if (!order) {
-        return res.status(404).json({
-          success: false,
-          message: "Order tidak ditemukan.",
-        });
-      }
-
-      // Check authorization
-      if (
-        req.user?.role === "customer" &&
-        order.userId._id.toString() !== req.user?.id
-      ) {
-        return res.status(403).json({
-          success: false,
-          message: "Anda tidak memiliki akses ke order ini.",
-        });
-      }
-
-      res.status(200).json({
-        success: true,
-        data: order,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
+    if (!order) {
+      return res.status(404).json({
         success: false,
-        message: "Terjadi kesalahan pada server.",
+        message: "Order tidak ditemukan.",
       });
     }
+
+    // Check authorization
+    if (
+      req.user?.role === "customer" &&
+      order.userId._id.toString() !== req.user?.id
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Anda tidak memiliki akses ke order ini.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: order,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Terjadi kesalahan pada server.",
+    });
   }
-);
+});
 
 // Upload Payment Proof (Customer)
 router.post(
@@ -224,7 +220,8 @@ router.post(
 
       res.status(200).json({
         success: true,
-        message: "Bukti pembayaran berhasil diupload. Admin akan memverifikasi.",
+        message:
+          "Bukti pembayaran berhasil diupload. Admin akan memverifikasi.",
         data: order,
       });
     } catch (error) {
@@ -234,7 +231,7 @@ router.post(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Get All Orders (Admin)
@@ -261,7 +258,7 @@ router.get(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 // Update Order Status (Admin)
@@ -279,7 +276,7 @@ router.patch(
           status: status || undefined,
           paymentStatus: paymentStatus || undefined,
         },
-        { new: true }
+        { new: true },
       );
 
       if (!order) {
@@ -301,7 +298,7 @@ router.patch(
         message: "Terjadi kesalahan pada server.",
       });
     }
-  }
+  },
 );
 
 export default router;
